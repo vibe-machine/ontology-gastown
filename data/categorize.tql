@@ -1,0 +1,101 @@
+# gastown Domain Categorization
+# Links TypeDoc entries to the gastown domain
+# Must be loaded AFTER domains.tql and all TypeDoc files
+#
+# Uses match-insert to find existing TypeDoc and Domain entities
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "Agent";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "Polecat";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "Witness";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "Refinery";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "Mayor";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "Deacon";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "Rig";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "CrewWorker";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "worksIn";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "assignedWork";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "monitors";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "crewMembership";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "polecatName";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "polecatState";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "rigName";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;
+
+match
+  $dom isa Domain, has name "gastown";
+  $doc isa TypeDoc, has typeLabel "witnessState";
+insert
+  (categorized: $doc, category: $dom) isa isCategorizedBy;

@@ -1,0 +1,21 @@
+{
+  "name": "gastown",
+  "displayName": "Gastown Agent Orchestration",
+  "version": "1.0.0",
+  "description": "Multi-agent orchestration domain for AI worker coordination. Defines Agent types (Polecat, Witness, Refinery) and workspaces (Rig) for parallel AI development.",
+  "author": "vibe-machine",
+  "license": "MIT",
+  "source": "https://github.com/vibe-machine/ontology-gastown",
+  "prefix": "gastown",
+  "schemas": [
+    { "name": "gastown", "file": "schema/gastown.tql" }
+  ],
+  "data": [
+    "data/gastown-typedoc.tql"
+  ],
+  "domains": "data/domains.tql",
+  "categorization": "data/categorize.tql",
+  "dependencies": [
+    { "name": "gist", "version": ">=14.0.0" }
+  ]
+}

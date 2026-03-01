@@ -1,0 +1,120 @@
+# Gas Town Domain Extension for TypeDB
+# Multi-agent orchestration entities
+# TypeQL 3.x syntax
+#
+# Prerequisites: gistCore.tql, beads.tql must be loaded first
+# Documentation: kg/docs/BEADS_MODEL.md
+
+define
+
+# =============================================================================
+# ATTRIBUTES - Agent
+# =============================================================================
+
+# Agent/Polecat attributes
+attribute polecatName, value string;
+attribute polecatState, value string;    # working, done, stuck
+attribute clonePath, value string;
+attribute branch, value string;
+
+# Rig attributes
+attribute rigName, value string;
+attribute rigPath, value string;
+attribute gitUrl, value string;
+attribute hasWitness, value boolean;
+attribute hasRefinery, value boolean;
+attribute hasMayor, value boolean;
+
+# Crew attributes
+attribute crewName, value string;
+
+# Witness attributes
+attribute witnessState, value string;    # stopped, running, paused
+attribute maxWorkers, value integer;
+attribute autoSpawn, value boolean;
+
+# =============================================================================
+# ENTITIES - Agent Hierarchy
+# =============================================================================
+
+# Agent - abstract base for AI agents in the system
+# Extends Category since agents categorize themselves by role
+entity Agent sub Category;
+
+# Polecat - ephemeral worker agent
+entity Polecat sub Agent,
+    owns polecatName @key,
+    owns polecatState,
+    owns clonePath,
+    owns branch,
+    plays worksIn:worker,
+    plays assignedWork:worker;
+
+# Witness - polecat monitoring agent
+entity Witness sub Agent,
+    owns witnessState,
+    owns maxWorkers,
+    owns autoSpawn,
+    plays monitors:monitor;
+
+# Refinery - merge handling agent
+entity Refinery sub Agent;
+
+# Mayor - town-level orchestrator
+entity Mayor sub Agent;
+
+# Deacon - town-level coordinator
+entity Deacon sub Agent;
+
+# =============================================================================
+# ENTITIES - Rig (Organization)
+# =============================================================================
+
+# Rig - git repository container with associated agents
+entity Rig sub Organization,
+    owns rigName @key,
+    owns rigPath,
+    owns gitUrl,
+    owns hasWitness,
+    owns hasRefinery,
+    owns hasMayor,
+    plays worksIn:workspace,
+    plays monitors:monitoredRig,
+    plays crewMembership:crew;
+
+# =============================================================================
+# ENTITIES - Human Workers
+# =============================================================================
+
+# CrewWorker - human-managed workspace in a rig
+entity CrewWorker sub Person,
+    owns crewName @key,
+    owns clonePath,
+    owns branch,
+    plays crewMembership:member;
+
+# =============================================================================
+# RELATIONS
+# =============================================================================
+
+# Polecat works in a rig
+relation worksIn,
+    relates worker,
+    relates workspace;
+
+# Polecat is assigned to work on a bead
+relation assignedWork,
+    relates worker,
+    relates assignedBead;
+
+Bead plays assignedWork:assignedBead;
+
+# Witness monitors a rig
+relation monitors,
+    relates monitor,
+    relates monitoredRig;
+
+# Crew members belong to a rig
+relation crewMembership,
+    relates member,
+    relates crew;
