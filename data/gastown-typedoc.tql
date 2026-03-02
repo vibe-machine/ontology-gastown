@@ -1,9 +1,3 @@
-# Gas Town Domain TypeDoc - Semantic Documentation
-# Insert after loading typedoc.tql schema
-#
-# Provides queryable documentation for Gas Town multi-agent orchestration types.
-# Reference: kg/docs/THE_GRAPH_THAT_KNOWS_ITSELF.md
-
 insert
 
 # =============================================================================

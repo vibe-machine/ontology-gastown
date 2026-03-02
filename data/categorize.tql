@@ -1,9 +1,3 @@
-# gastown Domain Categorization
-# Links TypeDoc entries to the gastown domain
-# Must be loaded AFTER domains.tql and all TypeDoc files
-#
-# Uses match-insert to find existing TypeDoc and Domain entities
-
 match
   $dom isa Domain, has name "gastown";
   $doc isa TypeDoc, has typeLabel "Agent";
