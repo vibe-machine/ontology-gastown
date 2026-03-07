@@ -10,10 +10,10 @@
     "tag": "v1.0.0",
     "commit": "57cc803d7f2030941a6684fbbcbf44e5ba7a6f4a",
     "sourceArtifacts": [
-      {
-        "path": "package.json",
-        "sha256": "37824510487f0f109c4a59ed0c59510a8fba9192e05a4c4b4176d5469e86e7ed"
-      },
+    {
+      "path": "package.json",
+      "sha256": "4d34d3eb6cf420eb77e9f89faaa997acf102f1d0161e0bfe32a0a213884bca2d"
+    },
       {
         "path": "schema/gastown.tql",
         "sha256": "ed4c6e48ea44ae303baa486e9be8bd7e18e156b2313c989944270decc4354320"
@@ -34,7 +34,7 @@
     {
       "kind": "provenance-schema",
       "path": "schema/package-provenance.tql",
-      "sha256": "217808c076c867032be85e7de65b620cf70ed018b693b8fdf88d47be286ff702"
+      "sha256": "c8bf0e12b465ae4df13e5c62339c89201a6e7f713f47157c34e20ce8380d737a"
     },
     {
       "kind": "documentation",

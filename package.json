@@ -29,10 +29,16 @@
     {
       "name": "gist",
       "version": ">=14.0.0"
+    },
+    {
+      "name": "beads",
+      "version": ">=0.59.0"
     }
   ],
   "scripts": {
-    "validate:bootstrap": "node tools/package_contract/validate_bootstrap.mjs"
+    "validate:bootstrap": "node tools/package_contract/validate_bootstrap.mjs",
+    "test:typedb-bootstrap": "node tools/package_contract/validate_typedb_bootstrap.mjs",
+    "test": "npm run validate:bootstrap && npm run test:typedb-bootstrap"
   },
   "manifests": [
     "manifests/gastown-v1.0.0.package-manifest.json"
