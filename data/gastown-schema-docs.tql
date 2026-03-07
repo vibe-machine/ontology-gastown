@@ -1,0 +1,176 @@
+# Provenance bootstrap
+# upstream-repo: https://github.com/vibe-machine/ontology-gastown
+# upstream-tag: v1.0.0
+# upstream-commit: 57cc803d7f2030941a6684fbbcbf44e5ba7a6f4a
+# source-artifacts:
+# - package.json
+# - schema/gastown.tql
+# manifest: manifests/gastown-v1.0.0.package-manifest.json
+# generator: hand-authored-package-bootstrap/0.1.0
+
+insert
+
+$module isa SchemaModule,
+  has moduleKey "gastown",
+  has moduleName "Gastown Agent Orchestration",
+  has moduleKind "hand-authored-package";
+
+$r1 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Agent",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Agent",
+  has typeLabel "Agent",
+  has kind "entity",
+  has prefLabel "Agent",
+  has definition "Abstract base type for AI agents in the Gas Town multi-agent orchestration system. Agents are autonomous workers that can claim beads, perform work, and coordinate with other agents.", 
+  has scopeNote "Agent extends Category since agents categorize themselves by role. Do not instantiate Agent directly; use concrete subtypes like Polecat, Witness, or Mayor.";
+(resource: $r1, module: $module) isa inModule;
+
+$r2 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Polecat",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Polecat",
+  has typeLabel "Polecat",
+  has kind "entity",
+  has prefLabel "Polecat",
+  has definition "An ephemeral worker agent that claims and executes beads. Polecats are spawned by the Witness, work in isolated git worktrees, and are terminated after completing their assigned work.", 
+  has scopeNote "Polecat is the primary worker agent type. Each polecat has a unique name, works in a specific rig, and tracks its state (working, done, stuck). The clonePath attribute points to its git worktree.";
+(resource: $r2, module: $module) isa inModule;
+
+$r3 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Witness",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Witness",
+  has typeLabel "Witness",
+  has kind "entity",
+  has prefLabel "Witness",
+  has definition "A monitoring and orchestration agent that oversees a rig. The Witness watches for ready beads, spawns polecats to work on them, monitors progress, and handles completion or escalation.", 
+  has scopeNote "Each rig has at most one Witness. Configure maxWorkers to limit parallel polecats. The autoSpawn attribute controls whether polecats are spawned automatically or manually triggered.";
+(resource: $r3, module: $module) isa inModule;
+
+$r4 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Refinery",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Refinery",
+  has typeLabel "Refinery",
+  has kind "entity",
+  has prefLabel "Refinery",
+  has definition "A specialized agent that handles merge operations. The Refinery monitors ready_to_merge beads, validates PRs, runs final checks, and merges approved work to the main branch.", 
+  has scopeNote "Refinery agents ensure code quality gates are met before merging. They coordinate with the Witness to prevent conflicts during parallel merges.";
+(resource: $r4, module: $module) isa inModule;
+
+$r5 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Mayor",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Mayor",
+  has typeLabel "Mayor",
+  has kind "entity",
+  has prefLabel "Mayor",
+  has definition "A town-level orchestrator agent that coordinates work across multiple rigs. The Mayor handles cross-project dependencies, resource allocation, and high-level planning.", 
+  has scopeNote "Mayor is optional for single-rig setups. Use Mayor when coordinating work across multiple repositories or when implementing organization-wide policies.";
+(resource: $r5, module: $module) isa inModule;
+
+$r6 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Deacon",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Deacon",
+  has typeLabel "Deacon",
+  has kind "entity",
+  has prefLabel "Deacon",
+  has definition "A town-level coordinator agent that handles administrative tasks and communication. The Deacon manages agent lifecycle events, broadcasts status updates, and maintains system health.", 
+  has scopeNote "Deacon complements Mayor by handling operational concerns while Mayor handles strategic planning.";
+(resource: $r6, module: $module) isa inModule;
+
+$r7 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Rig",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Rig",
+  has typeLabel "Rig",
+  has kind "entity",
+  has prefLabel "Rig",
+  has definition "A git repository workspace containing beads and associated agents. A rig represents a single project or codebase where AI agents perform work. Each rig has its own Witness, optional Refinery, and pool of Polecats.", 
+  has scopeNote "Rig extends Organization from gist. The rigPath attribute is the local filesystem path; gitUrl is the remote repository URL. Configure hasWitness, hasRefinery, hasMayor to control which agents are active.";
+(resource: $r7, module: $module) isa inModule;
+
+$r8 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#CrewWorker",
+  has iri "https://github.com/vibe-machine/ontology-gastown#CrewWorker",
+  has typeLabel "CrewWorker",
+  has kind "entity",
+  has prefLabel "CrewWorker",
+  has definition "A human-managed workspace within a rig. CrewWorkers represent human developers who work alongside AI agents, each with their own clone of the repository.", 
+  has scopeNote "CrewWorker extends Person. Use crewMembership relation to associate with a Rig. The clonePath and branch attributes track the human's working state.";
+(resource: $r8, module: $module) isa inModule;
+
+$r9 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn",
+  has iri "https://github.com/vibe-machine/ontology-gastown#worksIn",
+  has typeLabel "worksIn",
+  has kind "relation",
+  has prefLabel "worksIn",
+  has definition "Associates a worker (Polecat) with the workspace (Rig) where it operates. Roles: worker (the Polecat), workspace (the Rig).", 
+  has scopeNote "Each Polecat works in exactly one Rig. The relation is created when the Polecat is spawned and removed when it terminates.";
+(resource: $r9, module: $module) isa inModule;
+
+$r10 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork",
+  has iri "https://github.com/vibe-machine/ontology-gastown#assignedWork",
+  has typeLabel "assignedWork",
+  has kind "relation",
+  has prefLabel "assignedWork",
+  has definition "Assigns a bead to a worker agent. Roles: worker (the Polecat), assignedBead (the Bead being worked on).", 
+  has scopeNote "A Polecat typically has one assigned bead at a time. The Witness creates this relation when dispatching work.";
+(resource: $r10, module: $module) isa inModule;
+
+$r11 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#monitors",
+  has iri "https://github.com/vibe-machine/ontology-gastown#monitors",
+  has typeLabel "monitors",
+  has kind "relation",
+  has prefLabel "monitors",
+  has definition "Associates a Witness agent with the Rig it oversees. Roles: monitor (the Witness), monitoredRig (the Rig).", 
+  has scopeNote "Each Rig has at most one Witness monitoring it. The Witness watches for state changes and orchestrates polecat lifecycle.";
+(resource: $r11, module: $module) isa inModule;
+
+$r12 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership",
+  has iri "https://github.com/vibe-machine/ontology-gastown#crewMembership",
+  has typeLabel "crewMembership",
+  has kind "relation",
+  has prefLabel "crewMembership",
+  has definition "Associates human crew members with their rig. Roles: member (the CrewWorker), crew (the Rig they belong to).", 
+  has scopeNote "Crew members are humans who work in the same repository as AI agents. They can claim beads, review polecat work, and merge PRs.";
+(resource: $r12, module: $module) isa inModule;
+
+$r13 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#polecatName",
+  has iri "https://github.com/vibe-machine/ontology-gastown#polecatName",
+  has typeLabel "polecatName",
+  has kind "attribute",
+  has prefLabel "polecatName",
+  has definition "Unique identifier for a Polecat agent, typically auto-generated when spawned (e.g., polecat-a1b2c3).", 
+  has scopeNote "polecatName is the @key attribute for Polecat. Used to identify the agent in logs, worktree paths, and tmux sessions.";
+(resource: $r13, module: $module) isa inModule;
+
+$r14 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#polecatState",
+  has iri "https://github.com/vibe-machine/ontology-gastown#polecatState",
+  has typeLabel "polecatState",
+  has kind "attribute",
+  has prefLabel "polecatState",
+  has definition "Current operational state of a Polecat: working (actively processing), done (completed successfully), stuck (encountered blocking issue).", 
+  has scopeNote "The Witness monitors polecatState to detect completion or problems. A stuck polecat may need human intervention or reassignment.";
+(resource: $r14, module: $module) isa inModule;
+
+$r15 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#rigName",
+  has iri "https://github.com/vibe-machine/ontology-gastown#rigName",
+  has typeLabel "rigName",
+  has kind "attribute",
+  has prefLabel "rigName",
+  has definition "Human-readable name for a Rig, typically the repository name (e.g., dots, my-project).", 
+  has scopeNote "rigName is the @key attribute for Rig. Used in CLI commands, logs, and agent coordination.";
+(resource: $r15, module: $module) isa inModule;
+
+$r16 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#witnessState",
+  has iri "https://github.com/vibe-machine/ontology-gastown#witnessState",
+  has typeLabel "witnessState",
+  has kind "attribute",
+  has prefLabel "witnessState",
+  has definition "Operational state of a Witness: stopped (not running), running (actively monitoring), paused (temporarily halted).", 
+  has scopeNote "Control Witness behavior with this state. Pausing prevents new polecat spawns but allows existing work to complete.";
+(resource: $r16, module: $module) isa inModule;

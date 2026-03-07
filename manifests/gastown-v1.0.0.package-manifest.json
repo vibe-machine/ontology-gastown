@@ -1,0 +1,55 @@
+{
+  "$schema": "./package-manifest.schema.json",
+  "manifestVersion": "1.0.0",
+  "package": {
+    "name": "gastown",
+    "version": "1.0.0"
+  },
+  "upstream": {
+    "repoUrl": "https://github.com/vibe-machine/ontology-gastown",
+    "tag": "v1.0.0",
+    "commit": "57cc803d7f2030941a6684fbbcbf44e5ba7a6f4a",
+    "sourceArtifacts": [
+      {
+        "path": "package.json",
+        "sha256": "37824510487f0f109c4a59ed0c59510a8fba9192e05a4c4b4176d5469e86e7ed"
+      },
+      {
+        "path": "schema/gastown.tql",
+        "sha256": "ed4c6e48ea44ae303baa486e9be8bd7e18e156b2313c989944270decc4354320"
+      }
+    ]
+  },
+  "generator": {
+    "name": "hand-authored-package-bootstrap",
+    "version": "0.1.0",
+    "generatedAt": "2026-03-07T16:52:07Z"
+  },
+  "artifacts": [
+    {
+      "kind": "meta-schema",
+      "path": "schema/self-describing-schema.tql",
+      "sha256": "0c3cc3f5af3116422e2f13265247684826d1de56ac333fa7b0ac8e814713f7c8"
+    },
+    {
+      "kind": "provenance-schema",
+      "path": "schema/package-provenance.tql",
+      "sha256": "217808c076c867032be85e7de65b620cf70ed018b693b8fdf88d47be286ff702"
+    },
+    {
+      "kind": "documentation",
+      "path": "data/gastown-schema-docs.tql",
+      "sha256": "49cf41ee2cef457f56307dedb24d1dd1e06dbb5573e4669147849a0930552d8f"
+    },
+    {
+      "kind": "manifest-schema",
+      "path": "manifests/package-manifest.schema.json",
+      "sha256": "07599fe20623f3304bec0987320050f12efc1faf04fad7c12176ffe88e0b6a48"
+    },
+    {
+      "kind": "provenance-seeds",
+      "path": "data/gastown-provenance.tql",
+      "sha256": "43f097f74ba41f9f4dacd30dae8dbd4d85e721a9e408387a2515e9eaee21b91c"
+    }
+  ]
+}

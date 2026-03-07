@@ -1,5 +1,0 @@
-insert
-
-$gastown isa Domain,
-    has name "gastown",
-    has description "Multi-agent orchestration domain for AI worker coordination. Defines Agent types (Polecat, Witness, Refinery) and workspaces (Rig) for parallel AI development.";
