@@ -1,30 +1,30 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-gastown
-# upstream-tag: v1.0.0
-# upstream-commit: 636fc339a9f7243b9e17fd137c6b4d8c145c9997
+# upstream-tag: v1.0.1
+# upstream-commit: 150f865768b2b74167ef6efd9ccca0694758adda
 # source-artifacts:
 # - package.json
 # - schema/gastown.tql
-# manifest: manifests/gastown-v1.0.0.package-manifest.json
+# manifest: manifests/gastown-v1.0.1.package-manifest.json
 # generator: hand-authored-package-bootstrap/0.1.0
 
 insert
 
 $build isa OntologyPackageBuild,
-  has buildKey "gastown@1.0.0:636fc339a9f7243b9e17fd137c6b4d8c145c9997",
+  has buildKey "gastown@1.0.1:150f865768b2b74167ef6efd9ccca0694758adda",
   has packageName "gastown",
-  has packageVersion "1.0.0",
+  has packageVersion "1.0.1",
   has upstreamRepoUrl "https://github.com/vibe-machine/ontology-gastown",
-  has upstreamTag "v1.0.0",
-  has upstreamCommit "636fc339a9f7243b9e17fd137c6b4d8c145c9997",
-  has manifestPath "manifests/gastown-v1.0.0.package-manifest.json",
+  has upstreamTag "v1.0.1",
+  has upstreamCommit "150f865768b2b74167ef6efd9ccca0694758adda",
+  has manifestPath "manifests/gastown-v1.0.1.package-manifest.json",
   has generatorName "hand-authored-package-bootstrap",
   has generatorVersion "0.1.0",
-  has generatedAt "2026-03-08T15:44:13Z";
+  has generatedAt "2026-03-08T22:41:30Z";
 
 $s1 isa SourceArtifactRecord,
   has sourcePath "package.json",
-  has sourceSha256 "3d88b8fa4ed83b327593b56c0a1b2d6c54b11bf1b211f338d2093e18238e238e";
+  has sourceSha256 "2581ffd9b6fb6586053413440a50c67596b65273eb7f3723874f3867671be8c9";
 (build: $build, sourceArtifact: $s1) isa buildHasSourceArtifact;
 
 $s2 isa SourceArtifactRecord,
@@ -35,19 +35,19 @@ $s2 isa SourceArtifactRecord,
 $g1 isa GeneratedArtifactRecord,
   has artifactPath "schema/self-describing-schema.tql",
   has artifactKind "meta-schema",
-  has artifactSha256 "92da0c64f0c35ddc5df2d272cb5a8f4a9ff26e43ccba1dd600c757f3d6baffc6";
+  has artifactSha256 "9ed0836906fb961db016dabd1f8e03253afcbd63924f926615c5231c55583cda";
 (build: $build, generatedArtifact: $g1) isa buildHasGeneratedArtifact;
 
 $g2 isa GeneratedArtifactRecord,
   has artifactPath "schema/package-provenance.tql",
   has artifactKind "provenance-schema",
-  has artifactSha256 "b9a4230bf1c4bf409666ab94cebd26bd507294344f2f51215f584f01c75d4cce";
+  has artifactSha256 "8ed311eea991e3fe2b1ae93ba5f02183d43238ed899236c0c807fc6e55493055";
 (build: $build, generatedArtifact: $g2) isa buildHasGeneratedArtifact;
 
 $g3 isa GeneratedArtifactRecord,
   has artifactPath "data/gastown-schema-docs.tql",
   has artifactKind "documentation",
-  has artifactSha256 "913f0ca800e233388900ac12051f7b5329f029f8e88ebac14d3ced10b12cb6a6";
+  has artifactSha256 "03bed378c3d715f54f9e8d37695b296dd0e189fa5e8748fdff1208b4fb151442";
 (build: $build, generatedArtifact: $g3) isa buildHasGeneratedArtifact;
 
 $g4 isa GeneratedArtifactRecord,
