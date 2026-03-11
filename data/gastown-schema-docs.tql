@@ -1,11 +1,11 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-gastown
-# upstream-tag: v1.0.2
-# upstream-commit: 48f52bbb98aa1bf59f51fa9de7eda274d1046d4a
+# upstream-tag: v1.0.3
+# upstream-commit: 17646c2130073c7d44a583b3a68d5e4e7ddc8c38
 # source-artifacts:
 # - package.json
 # - schema/gastown.tql
-# manifest: manifests/gastown-v1.0.2.package-manifest.json
+# manifest: manifests/gastown-v1.0.3.package-manifest.json
 # generator: hand-authored-package-bootstrap/0.1.0
 put $module isa SchemaModule,
   has moduleKey "gastown",
