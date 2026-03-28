@@ -1,56 +1,65 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-gastown
-# upstream-tag: v1.0.3
-# upstream-commit: 17646c2130073c7d44a583b3a68d5e4e7ddc8c38
+# upstream-tag: v2.0.0
+# upstream-commit: 139771f9334af4979055f316e3a9ddf2735893f3
 # source-artifacts:
 # - package.json
 # - schema/gastown.tql
-# manifest: manifests/gastown-v1.0.3.package-manifest.json
+# manifest: manifests/gastown-v2.0.0.package-manifest.json
 # generator: hand-authored-package-bootstrap/0.1.0
 
 
-put $build isa OntologyPackageBuild,
-  has buildKey "gastown@1.0.3:17646c2130073c7d44a583b3a68d5e4e7ddc8c38",
-  has packageName "gastown",
-  has packageVersion "1.0.3",
-  has upstreamRepoUrl "https://github.com/vibe-machine/ontology-gastown",
-  has upstreamTag "v1.0.3",
-  has upstreamCommit "17646c2130073c7d44a583b3a68d5e4e7ddc8c38",
-  has manifestPath "manifests/gastown-v1.0.3.package-manifest.json",
+put $module isa OntologyModule,
+  has moduleName "gastown",
+  has moduleRepoUrl "https://github.com/vibe-machine/ontology-gastown";
+
+put $version isa OntologyModuleVersion,
+  has moduleVersionKey "https://github.com/vibe-machine/ontology-gastown@2.0.0",
+  has moduleVersion "2.0.0",
+  has upstreamCommit "139771f9334af4979055f316e3a9ddf2735893f3",
+  has manifestPath "manifests/gastown-v2.0.0.package-manifest.json",
   has generatorName "hand-authored-package-bootstrap",
   has generatorVersion "0.1.0",
-  has generatedAt "2026-03-11T02:25:11Z";
+  has generatedAt "2026-03-28T14:03:46Z";
+
+put (version: $version, module: $module) isa ontologyModuleVersionOf;
 
 put $s1 isa SourceArtifactRecord,
   has sourcePath "package.json",
-  has sourceSha256 "cb62c090cafb3ffd09db3343fe48fdc2c00ffa8755d7d542ff9ce2b0ca6560b6";
-put (build: $build, sourceArtifact: $s1) isa buildHasSourceArtifact;
+  has sourceSha256 "5068bd1b82d92638a2e5ca59866c5cdb670b20fcd06a38b97540d45aa25c6f74";
+put (version: $version, sourceArtifact: $s1) isa ontologyModuleVersionBasedOnSourceArtifact;
 
 put $s2 isa SourceArtifactRecord,
   has sourcePath "schema/gastown.tql",
   has sourceSha256 "ed4c6e48ea44ae303baa486e9be8bd7e18e156b2313c989944270decc4354320";
-put (build: $build, sourceArtifact: $s2) isa buildHasSourceArtifact;
+put (version: $version, sourceArtifact: $s2) isa ontologyModuleVersionBasedOnSourceArtifact;
 
 put $g1 isa GeneratedArtifactRecord,
   has artifactPath "schema/self-describing-schema.tql",
   has artifactKind "meta-schema",
-  has artifactSha256 "ad8537e2bd1ed6c3af30f59282c24187e196f71a110afd2fd95b2dec04013f81";
-put (build: $build, generatedArtifact: $g1) isa buildHasGeneratedArtifact;
+  has artifactSha256 "d8b54b7adf98725f64e08dd687007d38c28a67aaa5aeb420085c2145c1b1bea0";
+put (generatedArtifact: $g1, version: $version) isa generatedArtifactForOntologyModuleVersion;
 
 put $g2 isa GeneratedArtifactRecord,
   has artifactPath "schema/package-provenance.tql",
   has artifactKind "provenance-schema",
-  has artifactSha256 "b39a8a69182a9d2b76a98d1fee4affb568fda6d9d1eeeb3f5c1f1ae1c4c2c4ac";
-put (build: $build, generatedArtifact: $g2) isa buildHasGeneratedArtifact;
+  has artifactSha256 "27ab9fbf054c756543629755f7a0181706cc0d33b40db733eef2aadd253cf4ee";
+put (generatedArtifact: $g2, version: $version) isa generatedArtifactForOntologyModuleVersion;
 
 put $g3 isa GeneratedArtifactRecord,
-  has artifactPath "data/gastown-schema-docs.tql",
-  has artifactKind "documentation",
-  has artifactSha256 "43662fe94294392c1d9ccca76dc0b836376162509c6e6042ee68da38650b3748";
-put (build: $build, generatedArtifact: $g3) isa buildHasGeneratedArtifact;
+  has artifactPath "schema/administrative-operations.tql",
+  has artifactKind "administrative-schema",
+  has artifactSha256 "148087201980fb64e0d4e618ecb0e88e5a6304c301191e246662abb490df1ff6";
+put (generatedArtifact: $g3, version: $version) isa generatedArtifactForOntologyModuleVersion;
 
 put $g4 isa GeneratedArtifactRecord,
+  has artifactPath "data/gastown-schema-docs.tql",
+  has artifactKind "documentation",
+  has artifactSha256 "a31d3cf80b70966f07b62bd1d5e5796d6a1363d0e47122d859ab6900bc1cd1f9";
+put (generatedArtifact: $g4, version: $version) isa generatedArtifactForOntologyModuleVersion;
+
+put $g5 isa GeneratedArtifactRecord,
   has artifactPath "manifests/package-manifest.schema.json",
   has artifactKind "manifest-schema",
   has artifactSha256 "07599fe20623f3304bec0987320050f12efc1faf04fad7c12176ffe88e0b6a48";
-put (build: $build, generatedArtifact: $g4) isa buildHasGeneratedArtifact;
+put (generatedArtifact: $g5, version: $version) isa generatedArtifactForOntologyModuleVersion;

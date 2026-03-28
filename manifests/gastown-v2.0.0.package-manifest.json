@@ -3,16 +3,16 @@
   "manifestVersion": "1.0.0",
   "package": {
     "name": "gastown",
-    "version": "1.0.3"
+    "version": "2.0.0"
   },
   "upstream": {
     "repoUrl": "https://github.com/vibe-machine/ontology-gastown",
-    "tag": "v1.0.3",
-    "commit": "17646c2130073c7d44a583b3a68d5e4e7ddc8c38",
+    "tag": "v2.0.0",
+    "commit": "139771f9334af4979055f316e3a9ddf2735893f3",
     "sourceArtifacts": [
       {
         "path": "package.json",
-        "sha256": "cb62c090cafb3ffd09db3343fe48fdc2c00ffa8755d7d542ff9ce2b0ca6560b6"
+        "sha256": "5068bd1b82d92638a2e5ca59866c5cdb670b20fcd06a38b97540d45aa25c6f74"
       },
       {
         "path": "schema/gastown.tql",
@@ -23,23 +23,28 @@
   "generator": {
     "name": "hand-authored-package-bootstrap",
     "version": "0.1.0",
-    "generatedAt": "2026-03-11T02:25:11Z"
+    "generatedAt": "2026-03-28T14:03:46Z"
   },
   "artifacts": [
     {
       "kind": "meta-schema",
       "path": "schema/self-describing-schema.tql",
-      "sha256": "ad8537e2bd1ed6c3af30f59282c24187e196f71a110afd2fd95b2dec04013f81"
+      "sha256": "d8b54b7adf98725f64e08dd687007d38c28a67aaa5aeb420085c2145c1b1bea0"
     },
     {
       "kind": "provenance-schema",
       "path": "schema/package-provenance.tql",
-      "sha256": "b39a8a69182a9d2b76a98d1fee4affb568fda6d9d1eeeb3f5c1f1ae1c4c2c4ac"
+      "sha256": "27ab9fbf054c756543629755f7a0181706cc0d33b40db733eef2aadd253cf4ee"
+    },
+    {
+      "kind": "administrative-schema",
+      "path": "schema/administrative-operations.tql",
+      "sha256": "148087201980fb64e0d4e618ecb0e88e5a6304c301191e246662abb490df1ff6"
     },
     {
       "kind": "documentation",
       "path": "data/gastown-schema-docs.tql",
-      "sha256": "43662fe94294392c1d9ccca76dc0b836376162509c6e6042ee68da38650b3748"
+      "sha256": "a31d3cf80b70966f07b62bd1d5e5796d6a1363d0e47122d859ab6900bc1cd1f9"
     },
     {
       "kind": "manifest-schema",
@@ -49,7 +54,7 @@
     {
       "kind": "provenance-seeds",
       "path": "data/gastown-provenance.tql",
-      "sha256": "9387e468969533c073dd571cdb2c2a5e0ca8bd73633939e0c3d3debf9da11f90"
+      "sha256": "04df32d87a29f2d1399245779a17a3c5e75a05354c31a95af0bcde3a13b5714d"
     }
   ]
 }

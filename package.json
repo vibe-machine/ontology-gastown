@@ -1,7 +1,7 @@
 {
   "name": "gastown",
   "displayName": "Gastown Agent Orchestration",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Multi-agent orchestration domain for AI worker coordination. Defines Agent types (Polecat, Witness, Refinery) and workspaces (Rig) for parallel AI development.",
   "author": "vibe-machine",
   "license": "MIT",
@@ -17,6 +17,10 @@
       "file": "schema/package-provenance.tql"
     },
     {
+      "name": "administrative-operations",
+      "file": "schema/administrative-operations.tql"
+    },
+    {
       "name": "gastown",
       "file": "schema/gastown.tql"
     }
@@ -28,11 +32,11 @@
   "dependencies": [
     {
       "name": "gist",
-      "version": ">=1.0.0"
+      "version": ">=2.0.0"
     },
     {
       "name": "beads",
-      "version": ">=0.59.0"
+      "version": ">=2.0.0"
     }
   ],
   "scripts": {
@@ -44,12 +48,13 @@
     "release:check": "../ontology-tooling/bin/ontology-release --repo . --validate-only"
   },
   "manifests": [
-    "manifests/gastown-v1.0.3.package-manifest.json"
+    "manifests/gastown-v2.0.0.package-manifest.json"
   ],
   "assembly": {
     "loadOrder": [
       "schema/self-describing-schema.tql",
       "schema/package-provenance.tql",
+      "schema/administrative-operations.tql",
       "schema/gastown.tql",
       "data/gastown-provenance.tql",
       "data/gastown-schema-docs.tql"
@@ -57,14 +62,15 @@
     "generatedArtifacts": [
       "schema/self-describing-schema.tql",
       "schema/package-provenance.tql",
+      "schema/administrative-operations.tql",
       "data/gastown-schema-docs.tql",
       "data/gastown-provenance.tql",
       "manifests/package-manifest.schema.json",
-      "manifests/gastown-v1.0.3.package-manifest.json"
+      "manifests/gastown-v2.0.0.package-manifest.json"
     ]
   },
   "provenance": {
-    "manifest": "manifests/gastown-v1.0.3.package-manifest.json",
+    "manifest": "manifests/gastown-v2.0.0.package-manifest.json",
     "status": "bootstrap"
   },
   "legacyDocumentation": {
