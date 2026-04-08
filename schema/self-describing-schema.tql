@@ -1,11 +1,11 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-gastown
-# upstream-tag: v2.0.0
-# upstream-commit: 139771f9334af4979055f316e3a9ddf2735893f3
+# upstream-tag: v2.0.1
+# upstream-commit: 2511c851fae28996aa0038554b3d9889e157139a
 # source-artifacts:
 # - package.json
 # - schema/gastown.tql
-# manifest: manifests/gastown-v2.0.0.package-manifest.json
+# manifest: manifests/gastown-v2.0.1.package-manifest.json
 # generator: hand-authored-package-bootstrap/0.1.0
 define
 
@@ -13,6 +13,8 @@ attribute docKey, value string;
 attribute iri, value string;
 attribute typeLabel, value string;
 attribute kind, value string;
+attribute roleName, value string;
+attribute valueTypeName, value string;
 
 attribute prefLabel, value string;
 attribute definition, value string;
@@ -60,6 +62,8 @@ entity SchemaResource,
     owns iri,
     owns typeLabel,
     owns kind,
+    owns roleName @card(0..1),
+    owns valueTypeName @card(0..1),
     owns prefLabel,
     owns definition,
     owns scopeNote @card(0..),
@@ -83,9 +87,33 @@ relation resourceInGroup,
     relates resource,
     relates group;
 
+relation schemaSubTypeOf,
+    relates subtypeResource,
+    relates supertypeResource;
+
+relation schemaOwns,
+    relates ownerResource,
+    relates attributeResource;
+
+relation schemaPlays,
+    relates playerResource,
+    relates roleResource;
+
+relation schemaRelates,
+    relates relationResource,
+    relates roleResource;
+
 SchemaResource plays inModule:resource;
 SchemaModule plays inModule:module;
 SchemaGroup plays groupInView:group;
 SchemaView plays groupInView:view;
 SchemaResource plays resourceInGroup:resource;
 SchemaGroup plays resourceInGroup:group;
+SchemaResource plays schemaSubTypeOf:subtypeResource;
+SchemaResource plays schemaSubTypeOf:supertypeResource;
+SchemaResource plays schemaOwns:ownerResource;
+SchemaResource plays schemaOwns:attributeResource;
+SchemaResource plays schemaPlays:playerResource;
+SchemaResource plays schemaPlays:roleResource;
+SchemaResource plays schemaRelates:relationResource;
+SchemaResource plays schemaRelates:roleResource;

@@ -1,11 +1,11 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-gastown
-# upstream-tag: v2.0.0
-# upstream-commit: 139771f9334af4979055f316e3a9ddf2735893f3
+# upstream-tag: v2.0.1
+# upstream-commit: 2511c851fae28996aa0038554b3d9889e157139a
 # source-artifacts:
 # - package.json
 # - schema/gastown.tql
-# manifest: manifests/gastown-v2.0.0.package-manifest.json
+# manifest: manifests/gastown-v2.0.1.package-manifest.json
 # generator: hand-authored-package-bootstrap/0.1.0
 put $module isa SchemaModule,
   has moduleKey "gastown",
@@ -171,3 +171,600 @@ put $r16 isa SchemaResource,
   has definition "Operational state of a Witness: stopped (not running), running (actively monitoring), paused (temporarily halted).", 
   has scopeNote "Control Witness behavior with this state. Pausing prevents new polecat spawns but allows existing work to complete.";
 put (resource: $r16, module: $module) isa inModule;
+
+# -- BEGIN GENERATED STRUCTURAL METADATA --
+# Generated from authoritative schema definitions. Do not hand-edit this section.
+
+put $generated_role_1 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork:assignedBead",
+  has iri "https://github.com/vibe-machine/ontology-gastown#assignedWork:assignedBead",
+  has typeLabel "assignedWork:assignedBead",
+  has kind "role",
+  has roleName "assignedBead",
+  has prefLabel "assignedBead",
+  has definition "Role 'assignedBead' in relation 'assignedWork'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork:assignedBead";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_2 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork:worker",
+  has iri "https://github.com/vibe-machine/ontology-gastown#assignedWork:worker",
+  has typeLabel "assignedWork:worker",
+  has kind "role",
+  has roleName "worker",
+  has prefLabel "worker",
+  has definition "Role 'worker' in relation 'assignedWork'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork:worker";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_3 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership:crew",
+  has iri "https://github.com/vibe-machine/ontology-gastown#crewMembership:crew",
+  has typeLabel "crewMembership:crew",
+  has kind "role",
+  has roleName "crew",
+  has prefLabel "crew",
+  has definition "Role 'crew' in relation 'crewMembership'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership:crew";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_4 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership:member",
+  has iri "https://github.com/vibe-machine/ontology-gastown#crewMembership:member",
+  has typeLabel "crewMembership:member",
+  has kind "role",
+  has roleName "member",
+  has prefLabel "member",
+  has definition "Role 'member' in relation 'crewMembership'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership:member";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_5 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#monitors:monitor",
+  has iri "https://github.com/vibe-machine/ontology-gastown#monitors:monitor",
+  has typeLabel "monitors:monitor",
+  has kind "role",
+  has roleName "monitor",
+  has prefLabel "monitor",
+  has definition "Role 'monitor' in relation 'monitors'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#monitors:monitor";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_6 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#monitors:monitoredRig",
+  has iri "https://github.com/vibe-machine/ontology-gastown#monitors:monitoredRig",
+  has typeLabel "monitors:monitoredRig",
+  has kind "role",
+  has roleName "monitoredRig",
+  has prefLabel "monitoredRig",
+  has definition "Role 'monitoredRig' in relation 'monitors'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#monitors:monitoredRig";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_7 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn:worker",
+  has iri "https://github.com/vibe-machine/ontology-gastown#worksIn:worker",
+  has typeLabel "worksIn:worker",
+  has kind "role",
+  has roleName "worker",
+  has prefLabel "worker",
+  has definition "Role 'worker' in relation 'worksIn'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn:worker";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_8 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn:workspace",
+  has iri "https://github.com/vibe-machine/ontology-gastown#worksIn:workspace",
+  has typeLabel "worksIn:workspace",
+  has kind "role",
+  has roleName "workspace",
+  has prefLabel "workspace",
+  has definition "Role 'workspace' in relation 'worksIn'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn:workspace";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "autoSpawn";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "branch";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "crewName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "gitUrl";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "hasMayor";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "hasRefinery";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "hasWitness";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "polecatName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "polecatState";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "rigName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "rigPath";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "witnessState";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Agent";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "Person";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Deacon";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Mayor";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Refinery";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "Organization";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Witness";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "branch";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "clonePath";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "crewName";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "branch";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "clonePath";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "polecatName";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "polecatState";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "gitUrl";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "hasMayor";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "hasRefinery";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "hasWitness";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "rigName";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "rigPath";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Witness";
+  $struct_right isa SchemaResource, has typeLabel "autoSpawn";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Witness";
+  $struct_right isa SchemaResource, has typeLabel "maxWorkers";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Witness";
+  $struct_right isa SchemaResource, has typeLabel "witnessState";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Bead";
+  $struct_right isa SchemaResource, has typeLabel "assignedWork:assignedBead";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "crewMembership:member";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "assignedWork:worker";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "worksIn:worker";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "crewMembership:crew";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "monitors:monitoredRig";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "worksIn:workspace";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Witness";
+  $struct_right isa SchemaResource, has typeLabel "monitors:monitor";
+  not {
+    (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+  };
+insert
+  (playerResource: $struct_left, roleResource: $struct_right) isa schemaPlays;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "assignedWork";
+  $struct_right isa SchemaResource, has typeLabel "assignedWork:assignedBead";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "assignedWork";
+  $struct_right isa SchemaResource, has typeLabel "assignedWork:worker";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "crewMembership";
+  $struct_right isa SchemaResource, has typeLabel "crewMembership:crew";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "crewMembership";
+  $struct_right isa SchemaResource, has typeLabel "crewMembership:member";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "monitors";
+  $struct_right isa SchemaResource, has typeLabel "monitors:monitor";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "monitors";
+  $struct_right isa SchemaResource, has typeLabel "monitors:monitoredRig";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "worksIn";
+  $struct_right isa SchemaResource, has typeLabel "worksIn:worker";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "worksIn";
+  $struct_right isa SchemaResource, has typeLabel "worksIn:workspace";
+  not {
+    (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+  };
+insert
+  (relationResource: $struct_left, roleResource: $struct_right) isa schemaRelates;
+
+# -- END GENERATED STRUCTURAL METADATA --
