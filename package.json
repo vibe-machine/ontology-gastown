@@ -33,11 +33,11 @@
   "dependencies": [
     {
       "name": "gist",
-      "version": ">=2.0.0"
+      "version": ">=2.0.4"
     },
     {
       "name": "beads",
-      "version": ">=2.0.0"
+      "version": ">=2.0.3"
     }
   ],
   "scripts": {
