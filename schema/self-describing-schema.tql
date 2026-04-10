@@ -1,11 +1,11 @@
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-gastown
-# upstream-tag: v2.0.1
-# upstream-commit: 2511c851fae28996aa0038554b3d9889e157139a
+# upstream-tag: v2.0.2
+# upstream-commit: ccc879d05a98600b0bc5aa7061f5121f8ab9f0c2
 # source-artifacts:
 # - package.json
 # - schema/gastown.tql
-# manifest: manifests/gastown-v2.0.1.package-manifest.json
+# manifest: manifests/gastown-v2.0.2.package-manifest.json
 # generator: hand-authored-package-bootstrap/0.1.0
 define
 

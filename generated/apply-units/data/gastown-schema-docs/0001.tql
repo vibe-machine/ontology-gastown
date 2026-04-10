@@ -1,0 +1,519 @@
+# Generated executable apply unit from data/gastown-schema-docs.tql
+# manifest: manifests/gastown-v2.0.2.package-manifest.json
+
+# Provenance bootstrap
+# upstream-repo: https://github.com/vibe-machine/ontology-gastown
+# upstream-tag: v2.0.2
+# upstream-commit: ccc879d05a98600b0bc5aa7061f5121f8ab9f0c2
+# source-artifacts:
+# - package.json
+# - schema/gastown.tql
+# manifest: manifests/gastown-v2.0.2.package-manifest.json
+# generator: hand-authored-package-bootstrap/0.1.0
+put $module isa SchemaModule,
+  has moduleKey "gastown",
+  has moduleName "Gastown Agent Orchestration",
+  has moduleKind "hand-authored-package";
+
+put $r1 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Agent",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Agent",
+  has typeLabel "Agent",
+  has kind "entity",
+  has prefLabel "Agent",
+  has definition "Abstract base type for AI agents in the Gas Town multi-agent orchestration system. Agents are autonomous workers that can claim beads, perform work, and coordinate with other agents.", 
+  has scopeNote "Agent extends Category since agents categorize themselves by role. Do not instantiate Agent directly; use concrete subtypes like Polecat, Witness, or Mayor.";
+put (resource: $r1, module: $module) isa inModule;
+
+put $r2 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Polecat",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Polecat",
+  has typeLabel "Polecat",
+  has kind "entity",
+  has prefLabel "Polecat",
+  has definition "An ephemeral worker agent that claims and executes beads. Polecats are spawned by the Witness, work in isolated git worktrees, and are terminated after completing their assigned work.", 
+  has scopeNote "Polecat is the primary worker agent type. Each polecat has a unique name, works in a specific rig, and tracks its state (working, done, stuck). The clonePath attribute points to its git worktree.";
+put (resource: $r2, module: $module) isa inModule;
+
+put $r3 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Witness",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Witness",
+  has typeLabel "Witness",
+  has kind "entity",
+  has prefLabel "Witness",
+  has definition "A monitoring and orchestration agent that oversees a rig. The Witness watches for ready beads, spawns polecats to work on them, monitors progress, and handles completion or escalation.", 
+  has scopeNote "Each rig has at most one Witness. Configure maxWorkers to limit parallel polecats. The autoSpawn attribute controls whether polecats are spawned automatically or manually triggered.";
+put (resource: $r3, module: $module) isa inModule;
+
+put $r4 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Refinery",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Refinery",
+  has typeLabel "Refinery",
+  has kind "entity",
+  has prefLabel "Refinery",
+  has definition "A specialized agent that handles merge operations. The Refinery monitors ready_to_merge beads, validates PRs, runs final checks, and merges approved work to the main branch.", 
+  has scopeNote "Refinery agents ensure code quality gates are met before merging. They coordinate with the Witness to prevent conflicts during parallel merges.";
+put (resource: $r4, module: $module) isa inModule;
+
+put $r5 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Mayor",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Mayor",
+  has typeLabel "Mayor",
+  has kind "entity",
+  has prefLabel "Mayor",
+  has definition "A town-level orchestrator agent that coordinates work across multiple rigs. The Mayor handles cross-project dependencies, resource allocation, and high-level planning.", 
+  has scopeNote "Mayor is optional for single-rig setups. Use Mayor when coordinating work across multiple repositories or when implementing organization-wide policies.";
+put (resource: $r5, module: $module) isa inModule;
+
+put $r6 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Deacon",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Deacon",
+  has typeLabel "Deacon",
+  has kind "entity",
+  has prefLabel "Deacon",
+  has definition "A town-level coordinator agent that handles administrative tasks and communication. The Deacon manages agent lifecycle events, broadcasts status updates, and maintains system health.", 
+  has scopeNote "Deacon complements Mayor by handling operational concerns while Mayor handles strategic planning.";
+put (resource: $r6, module: $module) isa inModule;
+
+put $r7 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#Rig",
+  has iri "https://github.com/vibe-machine/ontology-gastown#Rig",
+  has typeLabel "Rig",
+  has kind "entity",
+  has prefLabel "Rig",
+  has definition "A git repository workspace containing beads and associated agents. A rig represents a single project or codebase where AI agents perform work. Each rig has its own Witness, optional Refinery, and pool of Polecats.", 
+  has scopeNote "Rig extends Organization from gist. The rigPath attribute is the local filesystem path; gitUrl is the remote repository URL. Configure hasWitness, hasRefinery, hasMayor to control which agents are active.";
+put (resource: $r7, module: $module) isa inModule;
+
+put $r8 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#CrewWorker",
+  has iri "https://github.com/vibe-machine/ontology-gastown#CrewWorker",
+  has typeLabel "CrewWorker",
+  has kind "entity",
+  has prefLabel "CrewWorker",
+  has definition "A human-managed workspace within a rig. CrewWorkers represent human developers who work alongside AI agents, each with their own clone of the repository.", 
+  has scopeNote "CrewWorker extends Person. Use crewMembership relation to associate with a Rig. The clonePath and branch attributes track the human's working state.";
+put (resource: $r8, module: $module) isa inModule;
+
+put $r9 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn",
+  has iri "https://github.com/vibe-machine/ontology-gastown#worksIn",
+  has typeLabel "worksIn",
+  has kind "relation",
+  has prefLabel "worksIn",
+  has definition "Associates a worker (Polecat) with the workspace (Rig) where it operates. Roles: worker (the Polecat), workspace (the Rig).", 
+  has scopeNote "Each Polecat works in exactly one Rig. The relation is created when the Polecat is spawned and removed when it terminates.";
+put (resource: $r9, module: $module) isa inModule;
+
+put $r10 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork",
+  has iri "https://github.com/vibe-machine/ontology-gastown#assignedWork",
+  has typeLabel "assignedWork",
+  has kind "relation",
+  has prefLabel "assignedWork",
+  has definition "Assigns a bead to a worker agent. Roles: worker (the Polecat), assignedBead (the Bead being worked on).", 
+  has scopeNote "A Polecat typically has one assigned bead at a time. The Witness creates this relation when dispatching work.";
+put (resource: $r10, module: $module) isa inModule;
+
+put $r11 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#monitors",
+  has iri "https://github.com/vibe-machine/ontology-gastown#monitors",
+  has typeLabel "monitors",
+  has kind "relation",
+  has prefLabel "monitors",
+  has definition "Associates a Witness agent with the Rig it oversees. Roles: monitor (the Witness), monitoredRig (the Rig).", 
+  has scopeNote "Each Rig has at most one Witness monitoring it. The Witness watches for state changes and orchestrates polecat lifecycle.";
+put (resource: $r11, module: $module) isa inModule;
+
+put $r12 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership",
+  has iri "https://github.com/vibe-machine/ontology-gastown#crewMembership",
+  has typeLabel "crewMembership",
+  has kind "relation",
+  has prefLabel "crewMembership",
+  has definition "Associates human crew members with their rig. Roles: member (the CrewWorker), crew (the Rig they belong to).", 
+  has scopeNote "Crew members are humans who work in the same repository as AI agents. They can claim beads, review polecat work, and merge PRs.";
+put (resource: $r12, module: $module) isa inModule;
+
+put $r13 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#polecatName",
+  has iri "https://github.com/vibe-machine/ontology-gastown#polecatName",
+  has typeLabel "polecatName",
+  has kind "attribute",
+  has prefLabel "polecatName",
+  has definition "Unique identifier for a Polecat agent, typically auto-generated when spawned (e.g., polecat-a1b2c3).", 
+  has scopeNote "polecatName is the @key attribute for Polecat. Used to identify the agent in logs, worktree paths, and tmux sessions.";
+put (resource: $r13, module: $module) isa inModule;
+
+put $r14 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#polecatState",
+  has iri "https://github.com/vibe-machine/ontology-gastown#polecatState",
+  has typeLabel "polecatState",
+  has kind "attribute",
+  has prefLabel "polecatState",
+  has definition "Current operational state of a Polecat: working (actively processing), done (completed successfully), stuck (encountered blocking issue).", 
+  has scopeNote "The Witness monitors polecatState to detect completion or problems. A stuck polecat may need human intervention or reassignment.";
+put (resource: $r14, module: $module) isa inModule;
+
+put $r15 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#rigName",
+  has iri "https://github.com/vibe-machine/ontology-gastown#rigName",
+  has typeLabel "rigName",
+  has kind "attribute",
+  has prefLabel "rigName",
+  has definition "Human-readable name for a Rig, typically the repository name (e.g., dots, my-project).", 
+  has scopeNote "rigName is the @key attribute for Rig. Used in CLI commands, logs, and agent coordination.";
+put (resource: $r15, module: $module) isa inModule;
+
+put $r16 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#witnessState",
+  has iri "https://github.com/vibe-machine/ontology-gastown#witnessState",
+  has typeLabel "witnessState",
+  has kind "attribute",
+  has prefLabel "witnessState",
+  has definition "Operational state of a Witness: stopped (not running), running (actively monitoring), paused (temporarily halted).", 
+  has scopeNote "Control Witness behavior with this state. Pausing prevents new polecat spawns but allows existing work to complete.";
+put (resource: $r16, module: $module) isa inModule;
+
+# -- BEGIN GENERATED STRUCTURAL METADATA --
+# Generated from authoritative schema definitions. Do not hand-edit this section.
+
+put $generated_role_1 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork:assignedBead",
+  has iri "https://github.com/vibe-machine/ontology-gastown#assignedWork:assignedBead",
+  has typeLabel "assignedWork:assignedBead",
+  has kind "role",
+  has roleName "assignedBead",
+  has prefLabel "assignedBead",
+  has definition "Role 'assignedBead' in relation 'assignedWork'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork:assignedBead";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_2 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork:worker",
+  has iri "https://github.com/vibe-machine/ontology-gastown#assignedWork:worker",
+  has typeLabel "assignedWork:worker",
+  has kind "role",
+  has roleName "worker",
+  has prefLabel "worker",
+  has definition "Role 'worker' in relation 'assignedWork'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#assignedWork:worker";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_3 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership:crew",
+  has iri "https://github.com/vibe-machine/ontology-gastown#crewMembership:crew",
+  has typeLabel "crewMembership:crew",
+  has kind "role",
+  has roleName "crew",
+  has prefLabel "crew",
+  has definition "Role 'crew' in relation 'crewMembership'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership:crew";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_4 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership:member",
+  has iri "https://github.com/vibe-machine/ontology-gastown#crewMembership:member",
+  has typeLabel "crewMembership:member",
+  has kind "role",
+  has roleName "member",
+  has prefLabel "member",
+  has definition "Role 'member' in relation 'crewMembership'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#crewMembership:member";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_5 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#monitors:monitor",
+  has iri "https://github.com/vibe-machine/ontology-gastown#monitors:monitor",
+  has typeLabel "monitors:monitor",
+  has kind "role",
+  has roleName "monitor",
+  has prefLabel "monitor",
+  has definition "Role 'monitor' in relation 'monitors'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#monitors:monitor";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_6 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#monitors:monitoredRig",
+  has iri "https://github.com/vibe-machine/ontology-gastown#monitors:monitoredRig",
+  has typeLabel "monitors:monitoredRig",
+  has kind "role",
+  has roleName "monitoredRig",
+  has prefLabel "monitoredRig",
+  has definition "Role 'monitoredRig' in relation 'monitors'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#monitors:monitoredRig";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_7 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn:worker",
+  has iri "https://github.com/vibe-machine/ontology-gastown#worksIn:worker",
+  has typeLabel "worksIn:worker",
+  has kind "role",
+  has roleName "worker",
+  has prefLabel "worker",
+  has definition "Role 'worker' in relation 'worksIn'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn:worker";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+put $generated_role_8 isa SchemaResource,
+  has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn:workspace",
+  has iri "https://github.com/vibe-machine/ontology-gastown#worksIn:workspace",
+  has typeLabel "worksIn:workspace",
+  has kind "role",
+  has roleName "workspace",
+  has prefLabel "workspace",
+  has definition "Role 'workspace' in relation 'worksIn'.";
+match
+  $schema_module isa SchemaModule, has moduleKey "gastown";
+  $schema_resource isa SchemaResource, has docKey "https://github.com/vibe-machine/ontology-gastown#worksIn:workspace";
+  not {
+    (resource: $schema_resource, module: $schema_module) isa inModule;
+  };
+insert
+  (resource: $schema_resource, module: $schema_module) isa inModule;
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "autoSpawn";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "branch";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "crewName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "gitUrl";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "hasMayor";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "hasRefinery";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "hasWitness";
+  not {
+    $schema_resource has valueTypeName "boolean";
+  };
+insert
+  $schema_resource has valueTypeName "boolean";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "polecatName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "polecatState";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "rigName";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "rigPath";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $schema_resource isa SchemaResource, has typeLabel "witnessState";
+  not {
+    $schema_resource has valueTypeName "string";
+  };
+insert
+  $schema_resource has valueTypeName "string";
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Agent";
+  $struct_right isa SchemaResource, has typeLabel "Category";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "Person";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Deacon";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Mayor";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Refinery";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Rig";
+  $struct_right isa SchemaResource, has typeLabel "Organization";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Witness";
+  $struct_right isa SchemaResource, has typeLabel "Agent";
+  not {
+    (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+  };
+insert
+  (subtypeResource: $struct_left, supertypeResource: $struct_right) isa schemaSubTypeOf;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "branch";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "clonePath";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "CrewWorker";
+  $struct_right isa SchemaResource, has typeLabel "crewName";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+
+match
+  $struct_left isa SchemaResource, has typeLabel "Polecat";
+  $struct_right isa SchemaResource, has typeLabel "branch";
+  not {
+    (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;
+  };
+insert
+  (ownerResource: $struct_left, attributeResource: $struct_right) isa schemaOwns;

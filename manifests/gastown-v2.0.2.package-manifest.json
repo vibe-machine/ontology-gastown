@@ -1,0 +1,75 @@
+{
+  "$schema": "./package-manifest.schema.json",
+  "manifestVersion": "1.0.0",
+  "package": {
+    "name": "gastown",
+    "version": "2.0.2"
+  },
+  "upstream": {
+    "repoUrl": "https://github.com/vibe-machine/ontology-gastown",
+    "tag": "v2.0.2",
+    "commit": "ccc879d05a98600b0bc5aa7061f5121f8ab9f0c2",
+    "sourceArtifacts": [
+      {
+        "path": "package.json",
+        "sha256": "ed52078397185b1400e85c94b48f9a728c093c7dcd52c0e0004e981155d345ee"
+      },
+      {
+        "path": "schema/gastown.tql",
+        "sha256": "ed4c6e48ea44ae303baa486e9be8bd7e18e156b2313c989944270decc4354320"
+      }
+    ]
+  },
+  "generator": {
+    "name": "hand-authored-package-bootstrap",
+    "version": "0.1.0",
+    "generatedAt": "2026-04-10T14:46:48Z"
+  },
+  "artifacts": [
+    {
+      "kind": "meta-schema",
+      "path": "schema/self-describing-schema.tql",
+      "sha256": "b46cc19fb79318d4089e14e0359aca1c7591cbda3c5eb9b94e0548ab5b63960f"
+    },
+    {
+      "kind": "provenance-schema",
+      "path": "schema/package-provenance.tql",
+      "sha256": "b64a0cf7e46563061d2197961a79c5f81b7cc4f66feb8249548472f41d95bb70"
+    },
+    {
+      "kind": "administrative-schema",
+      "path": "schema/administrative-operations.tql",
+      "sha256": "e0ba906c72694f7f5e1a8f2efc43f125ac2fcd71ca37ae8d1cdb1cdf0dfcbb4b"
+    },
+    {
+      "kind": "documentation",
+      "path": "data/gastown-schema-docs.tql",
+      "sha256": "66067c96b48de5ca5e5b48b1c451807efadf7d049928c387b64848335b8b2ea8"
+    },
+    {
+      "kind": "manifest-schema",
+      "path": "manifests/package-manifest.schema.json",
+      "sha256": "07599fe20623f3304bec0987320050f12efc1faf04fad7c12176ffe88e0b6a48"
+    },
+    {
+      "kind": "provenance-seeds",
+      "path": "data/gastown-provenance.tql",
+      "sha256": "4aecf00dce55e54d87150b7369f489a7865bfa85f28f028f78a3cf2d20c7be74"
+    },
+    {
+      "kind": "migration",
+      "path": "migrations/v2.0.1-to-v2.0.2.tql",
+      "sha256": "33d9dfa4ad303b4480d14e30820cbb18bf4c94fbfbe1d016febf59807a5c9f94"
+    },
+    {
+      "kind": "apply-unit",
+      "path": "generated/apply-units/data/gastown-schema-docs/0001.tql",
+      "sha256": "b38a3437504bda49cd54d9e6c4e4bc3b77875080f13816bd7dedfca0733e47e8"
+    },
+    {
+      "kind": "apply-unit",
+      "path": "generated/apply-units/data/gastown-schema-docs/0002.tql",
+      "sha256": "a8d7dc7696bffcf4454427d1d6443cc59a1edfdd7a3b57f52cd559773b96f7a4"
+    }
+  ]
+}
