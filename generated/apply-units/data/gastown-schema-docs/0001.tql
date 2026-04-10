@@ -1,14 +1,16 @@
 # Generated executable apply unit from data/gastown-schema-docs.tql
-# manifest: manifests/gastown-v2.0.2.package-manifest.json
+# manifest: manifests/gastown-v2.0.3.package-manifest.json
 
 # Provenance bootstrap
 # upstream-repo: https://github.com/vibe-machine/ontology-gastown
-# upstream-tag: v2.0.2
-# upstream-commit: ccc879d05a98600b0bc5aa7061f5121f8ab9f0c2
+# upstream-tag: v2.0.3
+# upstream-commit: 1838f1377cc4130b5ac7d88350b608100327490d
 # source-artifacts:
 # - package.json
 # - schema/gastown.tql
-# manifest: manifests/gastown-v2.0.2.package-manifest.json
+# - generated/apply-units/data/gastown-schema-docs/0001.tql
+# - generated/apply-units/data/gastown-schema-docs/0002.tql
+# manifest: manifests/gastown-v2.0.3.package-manifest.json
 # generator: hand-authored-package-bootstrap/0.1.0
 put $module isa SchemaModule,
   has moduleKey "gastown",

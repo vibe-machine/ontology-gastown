@@ -1,5 +1,5 @@
 # Generated executable apply unit from data/gastown-schema-docs.tql
-# manifest: manifests/gastown-v2.0.2.package-manifest.json
+# manifest: manifests/gastown-v2.0.3.package-manifest.json
 
 match
   $struct_left isa SchemaResource, has typeLabel "Agent";
