@@ -1,7 +1,7 @@
 {
   "name": "gastown",
   "displayName": "Gastown Agent Orchestration",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Multi-agent orchestration domain for AI worker coordination. Defines Agent types (Polecat, Witness, Refinery) and workspaces (Rig) for parallel AI development.",
   "author": "vibe-machine",
   "license": "MIT",
@@ -49,7 +49,7 @@
     "release:check": "../ontology-tooling/bin/ont release --repo . --validate-only"
   },
   "manifests": [
-    "manifests/gastown-v2.0.3.package-manifest.json"
+    "manifests/gastown-v2.0.4.package-manifest.json"
   ],
   "assembly": {
     "loadOrder": [
@@ -68,13 +68,11 @@
       "data/gastown-schema-docs.tql",
       "data/gastown-provenance.tql",
       "manifests/package-manifest.schema.json",
-      "manifests/gastown-v2.0.3.package-manifest.json",
-      "generated/apply-units/data/gastown-schema-docs/0001.tql",
-      "generated/apply-units/data/gastown-schema-docs/0002.tql"
+      "manifests/gastown-v2.0.4.package-manifest.json"
     ]
   },
   "provenance": {
-    "manifest": "manifests/gastown-v2.0.3.package-manifest.json",
+    "manifest": "manifests/gastown-v2.0.4.package-manifest.json",
     "status": "bootstrap"
   },
   "legacyDocumentation": {
