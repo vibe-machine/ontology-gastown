@@ -1,25 +1,13 @@
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import net from "node:net";
-import { spawn, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { runTypedbScript, startTypedbServer, stopTypedbServer } from "./typedb_local_server.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "../..");
 const workspaceRoot = path.resolve(root, "..");
-
-const TYPEDB_IMAGE = process.env.TYPEDB_IMAGE ?? "typedb/typedb:3.8.0";
-const CONTAINER_BIN = process.env.CONTAINER_BIN ?? "container";
-const CONTAINER_MOUNT = "/validation";
-
-// Non-standard ports inside the container to avoid conflicts
-const CONTAINER_GRPC_PORT = 41729;
-const CONTAINER_HTTP_PORT = 48000;
-
-// Host-side typedb console binary (for connecting to the container)
-const TYPEDB_CONSOLE = process.env.TYPEDB_BIN ?? path.join(os.homedir(), ".typedb", "typedb");
 
 function assertCondition(condition, message) {
   if (!condition) {
@@ -218,7 +206,7 @@ function chunkingError(output) {
     || output.includes("h2 protocol error");
 }
 
-async function applyWriteChunk(hostGrpcPort, tempDir, databaseName, chunk, context, maxBlocks = 5) {
+async function applyWriteChunk(server, tempDir, databaseName, chunk, context, maxBlocks = 5) {
   const chunks = splitWriteChunk(chunk, maxBlocks);
 
   for (const [index, writeChunk] of chunks.entries()) {
@@ -232,101 +220,19 @@ async function applyWriteChunk(hostGrpcPort, tempDir, databaseName, chunk, conte
       "utf8"
     );
 
-    const load = runTypedbScript(hostGrpcPort, loadScript, root);
+    const load = runTypedbScript(server, loadScript, root);
     if (load.status === 0) {
       continue;
     }
 
     const output = `${load.stdout}\n${load.stderr}`;
     if (maxBlocks > 1 && chunkingError(output)) {
-      await applyWriteChunk(hostGrpcPort, tempDir, databaseName, writeChunk, `${context}-retry-${index + 1}`, Math.max(1, Math.floor(maxBlocks / 2)));
+      await applyWriteChunk(server, tempDir, databaseName, writeChunk, `${context}-retry-${index + 1}`, Math.max(1, Math.floor(maxBlocks / 2)));
       continue;
     }
 
     assertCondition(false, `TypeDB data chunk load failed (${context} chunk ${index + 1}):\n${output}`);
   }
-}
-
-// ── Container-based TypeDB server ──────────────────────────────────
-
-async function getFreePort() {
-  return new Promise((resolve, reject) => {
-    const server = net.createServer();
-    server.listen(0, "127.0.0.1", () => {
-      const address = server.address();
-      server.close((error) => error ? reject(error) : resolve(address.port));
-    });
-    server.on("error", reject);
-  });
-}
-
-async function startTypedbContainer(tempRoot) {
-  const containerName = `typedb-validation-${process.pid}`;
-  const hostGrpcPort = await getFreePort();
-
-  // Start detached TypeDB container with:
-  // - Validation dir bind-mounted for script files
-  // - gRPC port published to a random host port
-  // - Non-standard ports inside the container
-  const runResult = spawnSync(CONTAINER_BIN, [
-    "run", "-d",
-    "--name", containerName,
-    "-c", "2", "-m", "2G",
-    "--mount", `type=bind,source=${tempRoot},target=${CONTAINER_MOUNT}`,
-    "--publish", `127.0.0.1:${hostGrpcPort}:${CONTAINER_GRPC_PORT}`,
-    TYPEDB_IMAGE,
-    `--server.address=0.0.0.0:${CONTAINER_GRPC_PORT}`,
-    `--server.http.address=0.0.0.0:${CONTAINER_HTTP_PORT}`,
-    "--diagnostics.reporting.metrics=false",
-    "--diagnostics.reporting.errors=false",
-    "--diagnostics.monitoring.enabled=false"
-  ], { encoding: "utf8" });
-
-  if (runResult.status !== 0) {
-    throw new Error(`Failed to start TypeDB container:\n${runResult.stderr}`);
-  }
-
-  // Wait for TypeDB to be ready by polling container logs
-  await new Promise((resolve, reject) => {
-    const deadline = Date.now() + 60000;
-    const poll = setInterval(() => {
-      if (Date.now() > deadline) {
-        clearInterval(poll);
-        reject(new Error("TypeDB container did not become ready within 60s"));
-        return;
-      }
-      const logs = spawnSync(CONTAINER_BIN, ["logs", containerName], { encoding: "utf8" });
-      if (logs.stdout.includes("Ready!") || logs.stderr.includes("Ready!")) {
-        clearInterval(poll);
-        resolve();
-      }
-    }, 1000);
-  });
-
-  console.log(`TypeDB container '${containerName}' ready (host port: ${hostGrpcPort})`);
-  return { containerName, hostGrpcPort };
-}
-
-async function stopContainer(containerName) {
-  if (!containerName) return;
-  spawnSync(CONTAINER_BIN, ["stop", "-t", "5", containerName], { encoding: "utf8" });
-  spawnSync(CONTAINER_BIN, ["rm", containerName], { encoding: "utf8" });
-  console.log(`TypeDB container '${containerName}' removed`);
-}
-
-/**
- * Run a TypeDB console script from the host, connecting to the container's
- * published gRPC port. Script paths are host-local file paths.
- */
-function runTypedbScript(hostGrpcPort, scriptPath, cwd) {
-  return spawnSync(TYPEDB_CONSOLE, [
-    "console",
-    `--address=127.0.0.1:${hostGrpcPort}`,
-    "--username=admin",
-    "--password=password",
-    "--tls-disabled",
-    "--script", scriptPath
-  ], { cwd, encoding: "utf8" });
 }
 
 // ── Main ───────────────────────────────────────────────────────────
@@ -352,15 +258,12 @@ async function main() {
   const typedbTemp = await fs.mkdtemp(path.join(os.tmpdir(), "ontology-package-bootstrap-"));
   const databaseName = `ontology_pkg_${process.pid}`;
 
-  // All file paths use container-internal mount for script references
   const mergedSchema = path.join(typedbTemp, "merged-schema.tql");
   await writeMergedQueryFile("define", schemaAssets, mergedSchema);
 
-  let containerName;
+  let server;
   try {
-    const container = await startTypedbContainer(typedbTemp);
-    containerName = container.containerName;
-    const { hostGrpcPort } = container;
+    server = await startTypedbServer(typedbTemp);
 
     // Load schema
     const schemaScript = path.join(typedbTemp, "schema-script.tql");
@@ -369,7 +272,7 @@ async function main() {
       `database create ${databaseName}\n\ntransaction schema ${databaseName}\n\nsource ${mergedSchema}\n\ncommit\n\nexit\n`,
       "utf8"
     );
-    const schemaResult = runTypedbScript(hostGrpcPort, schemaScript, root);
+    const schemaResult = runTypedbScript(server, schemaScript, root);
     assertCondition(schemaResult.status === 0, `TypeDB schema load failed:\n${schemaResult.stdout}\n${schemaResult.stderr}`);
     console.log("Schema loaded");
 
@@ -379,7 +282,7 @@ async function main() {
       const chunk = rewriteChunk(text, "insert", `write${index + 1}`);
       if (!chunk) continue;
       console.log(`Loading write asset ${index + 1}/${writeAssets.length} (${asset.relativePath})`);
-      await applyWriteChunk(hostGrpcPort, typedbTemp, databaseName, chunk, `asset-${index + 1}`);
+      await applyWriteChunk(server, typedbTemp, databaseName, chunk, `asset-${index + 1}`);
     }
     console.log("Data loaded");
 
@@ -394,7 +297,7 @@ async function main() {
         `transaction read ${databaseName}\n\nmatch\n$module isa OntologyModule,\n  has moduleRepoUrl "${moduleRepoUrl}";\n$version isa OntologyModuleVersion;\n(version: $version, module: $module) isa ontologyModuleVersionOf;\nlimit 1;\n\nclose\n\nexit\n`,
         "utf8"
       );
-      const query = runTypedbScript(hostGrpcPort, queryScript, root);
+      const query = runTypedbScript(server, queryScript, root);
       assertCondition(query.status === 0, `TypeDB provenance query failed for ${packageName}:\n${query.stdout}\n${query.stderr}`);
       assertCondition(
         query.stdout.includes("Finished. Total answers: 1"),
@@ -402,7 +305,7 @@ async function main() {
       );
     }
   } finally {
-    await stopContainer(containerName);
+    await stopTypedbServer(server);
     await fs.rm(typedbTemp, { recursive: true, force: true });
   }
 

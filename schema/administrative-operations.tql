@@ -20,7 +20,7 @@ entity OntologyModuleInstallation sub Event,
     plays installationOfOntologyModuleVersion:installation;
 
 relation installationOfOntologyModuleVersion sub isBasedOn,
-    relates installation as isBasedOnSubject,
-    relates version as isBasedOnObject;
+    relates installation as derivedThing,
+    relates version as basis;
 
 OntologyModuleVersion plays installationOfOntologyModuleVersion:version;

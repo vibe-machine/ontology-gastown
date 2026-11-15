@@ -55,13 +55,13 @@ entity GeneratedArtifactRecord sub SchemaMetaData,
     plays generatedArtifactForOntologyModuleVersion:generatedArtifact;
 
 relation ontologyModuleVersionOf sub isBasedOn,
-    relates version as isBasedOnSubject,
-    relates module as isBasedOnObject;
+    relates version as derivedThing,
+    relates module as basis;
 
 relation ontologyModuleVersionBasedOnSourceArtifact sub isBasedOn,
-    relates version as isBasedOnSubject,
-    relates sourceArtifact as isBasedOnObject;
+    relates version as derivedThing,
+    relates sourceArtifact as basis;
 
 relation generatedArtifactForOntologyModuleVersion sub isAbout,
-    relates generatedArtifact as isAboutSubject,
-    relates version as isAboutObject;
+    relates generatedArtifact as content,
+    relates version as subjectMatter;
