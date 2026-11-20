@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "ongas",
+  "project_id": "2a84a52a-2b6d-4864-85ee-48376a6b3458"
+}
